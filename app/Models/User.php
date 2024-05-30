@@ -40,4 +40,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserMaster::class, 'userID', 'userID');
     }
+
+    public function history()
+    {
+        return $this->hasMany(History::class, 'userID', 'userID');
+    }
 }

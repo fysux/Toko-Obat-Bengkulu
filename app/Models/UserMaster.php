@@ -25,4 +25,9 @@ class UserMaster extends Model
     {
         return $this->belongsTo(User::class, 'userID', 'userID');
     }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class, 'userMasterID', 'userMasterID');
+    }
 }

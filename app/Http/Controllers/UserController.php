@@ -89,5 +89,25 @@ class UserController extends Controller
         return redirect('/profile')->with('success', 'Password berhasil diperbarui');
     }
 
+    public function beli(Request $request, $productID)
+    {
+        $pembelian = new \App\Models\Order();
+        $pembelian->productID = $productID;
+        $pembelian->userID = Auth::user()->userID;
+        $pembelian->qty = $request->qty;
+        $pembelian->total = $pembelian->qty * $pembelian->product->price;
+        $pembelian->status = 'pending';
+        $pembelian->save();
+        $history = new \App\Models\History();
+        $history->orderID = $pembelian->orderID;
+        $history->qty = $pembelian->qty;
+        $history->save();
+        return redirect('/')->with('success', 'Pembelian berhasil');
+    }
 
+    public function pembelian()
+    {
+        $pembelian = \App\Models\Order::where('userID', Auth::user()->userID)->get();
+        return view('app.dashboard.pembelian', compact('pembelian'))->with('i', (request()->input('page', 1) - 1) * 5);
+    }
 }

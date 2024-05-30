@@ -1,5 +1,11 @@
 <div>
 @extends('app.dashboard.template.templates')
+@if(session()->has('error'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{ $error }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
 @section('content')
 <p class="card-title poppins-bold" style="opacity: 50%;">Akun</p>
 @if(session('success'))
@@ -20,7 +26,7 @@
                             <img src="{{ asset('./storage/images/' . auth()->user()->foto) }}" alt="" class="card-img-top" style="width: 100%; height: 100%;">
                         </div><br>
                     </div>
-                    <input type="file" name="foto" id="image" style="display: flex; margin: 15px auto; justify-content: center; align-items: center; width: 200px;">
+                    <input type="file" name="foto" id="image" style="display: flex; margin: 15px auto; justify-content: center; align-items: center; width: 200px;" value="{{ auth()->user()->foto }}">
                 </div>
                 {{-- tambahkan kode javascript untuk menampilkan gambar yang baru diinput user --}}
                 <script>

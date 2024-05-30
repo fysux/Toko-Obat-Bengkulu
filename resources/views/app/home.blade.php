@@ -13,33 +13,33 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" >
 </head>
 <body>
 {{-- cek user apakah sudah login --}}
 @if(Auth::check() == true)
      <header class="header poppins-regular">
          <div class="nav-container">
-             <span class="logo poppins-bold">P!Obat</span>
+             <span class="logo poppins-bold mt-3">P!Obat</span>
              <nav class="nav">
                 <ul class="nav--ul__one">
-                     <li class="nav-link"><a href="#home"><span class="iconamoon--home-light"></span></a></li>
-                     <li class="nav-link"><a href="{{ route('pembelian')}}"><span class="bi--basket"></span></a></li>
+                     <li class="nav-link"><a href="{{ route('pembelian')}}"><span class="bi--basket" style="margin-top: 10px;"></span></a></li>
                 </ul>
-                <div class="dropdown">
+                <div class="dropdown" style="margin-top: -12px;">
                     <a href="#dropdownMenu2">
                         <span class="subway--menu dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         <p style="font-size: 10pt;">{{ auth()->user()->name }}</p>
-                        <li>
-                            <a href="{{ route('profile') }}">
-                            <button class="dropdown-item" type="button">Akun</button>
-                            </a>
+                        <li class="dropdown-item">
+                            <a href="{{ route('profile') }}"  class="dropdown-item poppins-light text-decoration-none text-center align-items-center justify-content-center" >Akun</a>
                         </li>
                         
                         <p style="font-size: 10pt;">Keluar</p>
                         <li>
-                            <a href="{{ route('logout') }}">
+                            <a href="{{ route('logout') }}" class="text-decoration-none ">
                             <button class="dropdown-item-keluar" type="button">Keluar</button>
                             </a>
                         </li>
@@ -64,25 +64,27 @@
 
      <section class="content">
         <div class="content-container">
-            <table class="content-table">
-                <thead class="poppins-light">
-                    <tr>
-                        <th>Obat</th>
-                        <th>Deskripsi</th>
-                    </tr>
-                </thead>
-                @php
-                    $obat = \App\Models\User::all();
-                @endphp
-                <tbody class="poppins-light">
-                    @foreach ($obat as $obat)
-                        <tr>
-                            <td>{{ $obat->name }}</td>
-                            <td>{{ $obat->email }}</td>
-                        </tr>
+            <div class="card">
+                <p class="card-title poppins-bold mt-3 mb-3 text-center">Daftar Produk</p>
+                <div class="card-body"  style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+                    @foreach ($products as $product)
+                    <div class="card" style="">
+                        <div class="card-body poppins-regular">
+                            <div class="row" style="align-items: center; display: flex; justify-content: center; width:200px;">
+                                <div class="col-3" style="width: 200px; height: 200px; display: flex; justify-content: center;">
+                                    <img src="{{asset('storage/images/'.$product->image)}}" alt="" class="card-img-top" style="width: 150px; height: 150px; object-fit: cover; border-radius: 10px">
+                                </div>
+                                <div class="col-9">
+                                    <h5 class="card-title poppins-bold">{{ $product->name }}</h5>
+                                    <p class="card-text poppins-light">{{ $product->description }}</p>
+                                    <a href="{{ route('beli', $product->productID)}}" class="btn btn-primary">Beli</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     @endforeach
-                </tbody>
-            </table>
+                </div>
+            </div>
         </div>
      </section>
 @else
@@ -91,6 +93,9 @@
         window.location.href = "{{ route('welcome') }}";
     </script>
 @endif
+    <footer class="footer">
+        <p class="poppins-light">Copyright © 2024 KelompokUhuy. All rights reserved.</p>
+    </footer>
 </body>
 <script>
     document.addEventListener("DOMContentLoaded", function() {

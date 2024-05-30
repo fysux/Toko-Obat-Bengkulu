@@ -3,9 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
-    return view('app.home');
-})->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/beranda', function () {
     return view('welcome');
@@ -39,10 +37,20 @@ Route::post('/profileupdate', [App\Http\Controllers\UserMasterController::class,
 
 Route::post('/profilemaster', [App\Http\Controllers\UserMasterController::class, 'update'])->name('update-master');
 
-Route::get('/pembelian', function () {
-    return view('app.dashboard.pembelian');
-})->name('pembelian');
+Route::get('/penjualan', [App\Http\Controllers\ProductController::class, 'index'])->name('penjualan');
 
-Route::get('/penjualan', function () {
-    return view('app.dashboard.penjualan');
-})->name('penjualan');
+Route::get('/penjualan/tambahobat', [App\Http\Controllers\ProductController::class, 'create'])->name('tambahobat');
+
+Route::post('/penjualan/tambahobat', [App\Http\Controllers\ProductController::class, 'store'])->name('tambahobat');
+
+Route::get('/penjualan/editobat/{productID}', [App\Http\Controllers\ProductController::class, 'edit'])->name('editobat');
+
+Route::post('/penjualan/editobat/{productID}', [App\Http\Controllers\ProductController::class, 'update'])->name('updateobat');
+
+Route::get('/penjualan/hapusobat/{productID}', [App\Http\Controllers\ProductController::class, 'destroy'])->name('hapusobat');
+
+Route::get('/beli/{productID}', [App\Http\Controllers\HomeController::class, 'buy'])->name('beli');
+
+Route::post('/beli/{productID}', [App\Http\Controllers\UserController::class, 'beli'])->name('beliproduk');
+
+Route::get('/pembelian', [App\Http\Controllers\UserController::class, 'pembelian'])->name('pembelian');

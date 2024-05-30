@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('image');
             $table->float('price');
+            $table->integer('qty');
             $table->unsignedBigInteger('userMasterID');
             $table->timestamps();
 
