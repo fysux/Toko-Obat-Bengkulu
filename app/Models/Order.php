@@ -17,6 +17,7 @@ class Order extends Model
         'userID',
         'productID',
         'qty',
+        'jasakirim',
         'total',
         'status',
     ];
@@ -34,5 +35,10 @@ class Order extends Model
     public function history()
     {
         return $this->hasMany(History::class, 'orderID');
+    }
+
+    public function payment()
+    {
+        return $this->hasMany(Payment::class, 'orderID');
     }
 }

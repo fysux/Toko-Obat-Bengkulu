@@ -13,11 +13,14 @@ class ProductController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
         // Ambil userMasterID dari tabel usermaster
-        $userMasterID = Auth::user()->usermaster->userMasterID;
+        $userMasterID = $user->usermaster && $user->usermaster->userMasterID !== null
+        ? $user->usermaster->userMasterID
+        : $user->userID;
 
-        if($userMasterID == null) { 
-            return view('app.dashboard.master')->with(session('error'), 'Akun Tidak Terdaftar Sebagai Dokter / Apoteker');
+        if($userMasterID === null) {
+            return view('app.dashboard.master')->with('error', 'Akun Tidak Terdaftar Sebagai Dokter / Apoteker');
         }
         
         // Ambil daftar productID berdasarkan userMasterID

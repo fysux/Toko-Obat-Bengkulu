@@ -1,5 +1,6 @@
 @extends('app.dashboard.template.templates')
 @section('content')
+
 <p class="card-title poppins-bold">Penjualan</p>
 <div class="row" class="poppins-regular" style="display: flex;">
     <div class="col-md-3">

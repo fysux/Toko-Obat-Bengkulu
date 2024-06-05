@@ -17,7 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('productID');
             $table->integer('qty');
             $table->float('total');
-            $table->string('status');
+            $table->string('jasakirim');
+            $table->enum('status', ['pending', 'success']);
             $table->timestamps();
 
             $table->foreign('userID')->references('userID')->on('user');

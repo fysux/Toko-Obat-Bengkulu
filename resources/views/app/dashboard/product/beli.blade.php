@@ -21,11 +21,11 @@
                     <a class="navbar-brand poppins-bold" href="#" style="font-size: 14pt; color:#ff6f61">{{ $title }}</a>
                 </div>
                 <div class="container-fluid" style="display: flex; justify-content: flex-end; font-size: 12pt;">
-                    <a class="navbar-brand poppins-light text-danger" href="{{ route('penjualan') }}" style="font-size: 12pt;">Kembali</a>
+                    <a class="navbar-brand poppins-light text-danger" href="{{ route('home') }}" style="font-size: 12pt;">Kembali</a>
                 </div>
             </nav>
         </div>
-        <div class="container-fluid align-items-center justify-content-center d-flex" style="margin-top: 20px; display: block; flex-direction: column;">
+        <div class="container-fluid align-items-center justify-content-center d-flex" style="background-color: rgba(255, 111, 97, 0.2);  margin-top: 20px; display: block; flex-direction: flex; justify-content: space-between;">
             <div class="container" style="margin-top: 20px; ">
                 <div class="card" style="width: 400px; height: 100%">
                     <div class="card-body" style="">
@@ -48,15 +48,45 @@
                 </div>
             </div>
             
-            <div class="container" style="display: flex; margin-top: 20px">
+            <div class="container" style="display: flex; margin-top: 20px;">
                 <form action="{{ route('beliproduk', $product->productID)}}" method="post">
                     @csrf
-                    <input type="hidden" name="productID" value="{{ $product->productID }}">
-                    <div class="form-group">
-                        <i class="bi bi-plus">Tambah Barang</i>
-                        <input type="number" name="qty" class="form-control" placeholder="Jumlah" style="width: 200px; margin-right: 10px; ">
+                    <div class="form-group" style="display: column;justify-content: center;">
+                        <div class="form-group mb-3">
+                            <p class="poppins-bold">Payment</p>
+                            <div class="card">
+                                <p class="poppins-bold mt-3" style="margin: 0; margin-left: 20px">Rp. {{ number_format($product->price, 0, ',', '.') }}</p>
+                                <div class="card-body">
+                                    <div class="col">
+                                        <p class="poppins-regular" style="">Jasa Pengirim</p>
+                                        <select name="jasakirim" id="" class="form-control custom-select" style="width: 500px" >
+                                            <option value="J&T">J&T</option>
+                                            <option value="JNE">JNE</option>
+                                            <option value="TIKI">TIKI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col mt-3">
+                                        <p class="poppins-regular">Pembayaran</p>
+                                        <select name="bank" id="" class="form-control custom-select">
+                                            <option value="">Saldo Member</option>
+                                            <option value="">BCA</option>
+                                            <option value="">Mandiri</option>
+                                            <option value="">BRI</option>
+                                            <option value="">BNI</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" name="productID" value="{{ $product->productID }}">
+                            <div class="form-group">
+                                <i class="bi bi-plus">Tambah Barang</i>
+                                <input type="number" name="qty" class="form-control" placeholder="Jumlah" style="width: 200px; margin-right: 10px; ">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3 mb-3" style="margin: 0;">Beli</button>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">Beli</button>
                 </form>
             </div>
         </div>

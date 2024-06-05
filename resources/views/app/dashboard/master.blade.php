@@ -1,11 +1,5 @@
 <div>
 @extends('app.dashboard.template.templates')
-@if(session()->has('error'))
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    {{ $error }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-@endif
 @section('content')
 <p class="card-title poppins-bold" style="opacity: 50%;">Akun</p>
 @if(session('success'))

@@ -68,16 +68,26 @@
                 <p class="card-title poppins-bold mt-3 mb-3 text-center">Daftar Produk</p>
                 <div class="card-body"  style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
                     @foreach ($products as $product)
-                    <div class="card" style="">
+                    <div class="card mb-3" style="">
                         <div class="card-body poppins-regular">
-                            <div class="row" style="align-items: center; display: flex; justify-content: center; width:200px;">
+                            <div class="row" style="align-items: center; display: flex; justify-content: center; width:200px; height: 500px">
                                 <div class="col-3" style="width: 200px; height: 200px; display: flex; justify-content: center;">
                                     <img src="{{asset('storage/images/'.$product->image)}}" alt="" class="card-img-top" style="width: 150px; height: 150px; object-fit: cover; border-radius: 10px">
                                 </div>
-                                <div class="col-9">
+                                <div class="col-9" style="width: 200px; height: 150px;">
                                     <h5 class="card-title poppins-bold">{{ $product->name }}</h5>
                                     <p class="card-text poppins-light">{{ $product->description }}</p>
-                                    <a href="{{ route('beli', $product->productID)}}" class="btn btn-primary">Beli</a>
+                                </div>
+                                <p class="card-title poppins-light">{{ 'Stok Tersisa: ' . $product->qty }}</p>
+                                <p class="card-title poppins-bold">{{ 'Rp'. number_format($product->price, 0, ',', '.') }}</p>
+                                <a href="{{ route('beli', $product->productID)}}" class="btn btn-primary bi bi-bag"> Beli</a>
+                                <div class="" style="width: 100%; margin: 0; padding: 0; ">
+                                    <form action="" method="POST">
+                                        <a href="" class="btn btn-warning" style="width: 100%;">
+                                            {{-- icon keranjang --}}
+                                            <i class="bi bi-cart"> keranjang</i>
+                                        </a>
+                                    </form>
                                 </div>
                             </div>
                         </div>

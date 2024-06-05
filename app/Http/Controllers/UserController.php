@@ -96,7 +96,9 @@ class UserController extends Controller
         $pembelian->userID = Auth::user()->userID;
         $pembelian->qty = $request->qty;
         $pembelian->total = $pembelian->qty * $pembelian->product->price;
-        $pembelian->status = 'pending';
+        $status = [];
+        $status[0] = $request->jasakirim;
+        $pembelian->jasakirim = $status[0];
         $pembelian->save();
         $history = new \App\Models\History();
         $history->orderID = $pembelian->orderID;
